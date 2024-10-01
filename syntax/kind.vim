@@ -17,7 +17,7 @@ syntax match kindFunction '\<\a\w*\(\.\w\+\)*\s*\ze('
 
 " Language keywords
 syntax keyword kindKeywords open case with for in as switch type if then elif else do while when then pass rewrite match object let default
- 
+
 "Number literals
 syntax match kindNumber "\<[0-9]\+\>\|\<[0-9_]\+\>\|\<0[xX][0-9a-fA-F_]\+\>\|\<0[oO][0-7_]\+\>\|\<0[bB][10_]\+\>"
 
@@ -34,7 +34,7 @@ syntax region kindString start='"' end='"'
 syntax region kindString start='\'' end='\''
 
 " Specials
-syntax keyword kindSpecial lambda Nil Cons One Zero Succ pred true false new empty tie E I O pos neg tail head fst snd lft rgt left right val True False
+syntax keyword kindSpecial lambda Nil Cons One Zero Succ pred true false new empty tie pos neg tail head fst snd lft rgt left right val True False
 
 " Type
 syntax match kindTypeNames "\<[A-Z][a-zA-Z0-9_']*\>"
@@ -49,7 +49,7 @@ syntax match kindUnusedFuncDef '\v<_[a-z0-9_]+'
             \ contained
             \ nextgroup=kindTypeDefParams
 
-syntax keyword kindUserIdent def return in import use
+syntax keyword kindUserIdent def return in import use Refl
 syntax match kindUserStorage "(\s*\a\w*\s*\(,\s*\a\w*\s*\)*)"
 
 syntax match kindUserStorage ' \zs[a-zA-Z0-9_]\+\ze\s*='
@@ -78,17 +78,23 @@ syntax region kindAttributeParenWrapped
 " Define a new syntax group for kind symbols
 syntax match kindSymbol /{!!}/
 
-syntax keyword kindModule module where instance public
+syntax keyword kindModule module where instance public Refl
 
-syntax keyword kindLets let refl
+syntax keyword kindRefl let
 
 " Nova regra para destacar elementos seguidos por '#' e terminando com '{'
-syntax match kindConstructor '\v#\s*\w+([^:{]|\n)*(\ze[:{\n])' 
+syntax match kindConstructor '\v#\s*\w+([^:{]|\n)*(\ze[:{\n])'
 
+syntax match kindRefl '\v#Refl\s*\{\}'
 
 
 " Link the new syntax group to the same highlight group as numeric operators
 syntax match kindSpecialSymbols /λ\|Σ\|≡\|->\|*\|∀/
+
+
+syntax match kindVar '/\zs[a-z]\+'
+syntax match kindVar 'λ[a-zA-Z]\+'
+
 
 nnoremap \t i→<ESC>
 nnoremap \l iλ<ESC>
@@ -106,14 +112,14 @@ inoremap \s Σ
 " Set highlights
 highlight default link kindAttribute      Keyword
 highlight default link kindCommentLine    Comment
-highlight default link kindConstructor    Boolean
+highlight default link kindConstructor    Constant
 highlight default link kindDelimiter      Delimiter
 highlight default link kindEspecial       Identifier
 highlight default link kindFn             Keyword
 highlight default link kindFuncDef        Function
 highlight default link kindFunction       Function
 highlight default link kindKeywords       Statement
-highlight default link kindLets           Define
+highlight default link kindRefl           Identifier
 highlight default link kindModule         Identifier
 highlight default link kindNumber         Number
 highlight default link kindOperator       Operator
@@ -122,7 +128,8 @@ highlight default link kindSpecialSymbols Macro
 highlight default link kindString         String
 highlight default link kindSymbol         Question
 highlight default link kindTodo           Todo
-highlight default link kindTypeNames      Type
+highlight default link kindTypeNames      MoreMsg
 highlight default link kindUnusedFuncDef  kindFuncDef
 highlight default link kindUserIdent      Identifier
 highlight default link kindUserStorage    Constant
+highlight default link kindVar            Macro
