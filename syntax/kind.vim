@@ -34,7 +34,7 @@ syntax region kindString start='"' end='"'
 syntax region kindString start='\'' end='\''
 
 " Specials
-syntax keyword kindSpecial lambda Nil Cons One Zero Succ pred true false new empty tie pos neg tail head fst snd lft rgt left right val True False
+syntax keyword kindSpecial lambda #Nil #Cons One #Zero #Succ pred #True #False new empty tie pos neg tail head fst snd lft rgt left right val True False
 
 " Type
 syntax match kindTypeNames "\<[A-Z][a-zA-Z0-9_']*\>"
@@ -108,28 +108,54 @@ inoremap \f ∀
 inoremap \e ≡
 inoremap \s Σ
 
+"
+" " Set highlights
+" highlight default link kindAttribute      Keyword
+" highlight default link kindCommentLine    Comment
+" highlight default link kindConstructor    Constant
+" highlight default link kindDelimiter      Delimiter
+" highlight default link kindEspecial       Identifier
+" highlight default link kindFn             Keyword
+" highlight default link kindFuncDef        Function
+" highlight default link kindFunction       Function
+" highlight default link kindKeywords       Statement
+" highlight default link kindRefl           Identifier
+" highlight default link kindModule         Identifier
+" highlight default link kindNumber         Removed
+" highlight default link kindOperator       Operator
+" highlight default link kindSpecial        MoreMsg
+" highlight default link kindSpecialSymbols Macro
+" highlight default link kindString         String
+" highlight default link kindSymbol         Question
+" highlight default link kindTodo           Todo
+" highlight default link kindTypeNames      MoreMsg
+" highlight default link kindUnusedFuncDef  kindFuncDef
+" highlight default link kindUserIdent      Identifier
+" highlight default link kindUserStorage    Constant
+" highlight default link kindVar            Macro
 
-" Set highlights
-highlight default link kindAttribute      Keyword
+
+" Links de highlight organizados
+highlight default link kindAttribute      Attribute        " Antes estava como Keyword
 highlight default link kindCommentLine    Comment
-highlight default link kindConstructor    Constant
+highlight default link kindConstructor    Constructor      " Antes estava como Constant
 highlight default link kindDelimiter      Delimiter
-highlight default link kindEspecial       Identifier
-highlight default link kindFn             Keyword
+highlight default link kindEspecial       Identifier          " Antes estava como Identifier
+highlight default link kindFn             Function         " Antes estava como Keyword
 highlight default link kindFuncDef        Function
 highlight default link kindFunction       Function
-highlight default link kindKeywords       Statement
-highlight default link kindRefl           Identifier
-highlight default link kindModule         Identifier
-highlight default link kindNumber         Number
+highlight default link kindKeywords       Keyword          " Antes estava como Statement
+highlight default link kindRefl           Special          " Antes estava como Identifier
+highlight default link kindModule         Module           " Antes estava como Identifier
+highlight default link kindNumber         Number           " Antes estava como Removed
 highlight default link kindOperator       Operator
-highlight default link kindSpecial        MoreMsg
-highlight default link kindSpecialSymbols Macro
+highlight default link kindSpecial        Special          " Antes estava como MoreMsg
+highlight default link kindSpecialSymbols Macro          " Antes estava como Macro
 highlight default link kindString         String
-highlight default link kindSymbol         Question
+highlight default link kindSymbol         Symbol           " Antes estava como Question
 highlight default link kindTodo           Todo
-highlight default link kindTypeNames      MoreMsg
+highlight default link kindTypeNames      Type             " Antes estava como MoreMsg
 highlight default link kindUnusedFuncDef  kindFuncDef
 highlight default link kindUserIdent      Identifier
-highlight default link kindUserStorage    Constant
-highlight default link kindVar            Macro
+highlight default link kindUserStorage    Storage          " Antes estava como Constant
+highlight default link kindVar            Variable         " Antes estava como Macro
